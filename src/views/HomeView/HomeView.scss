@@ -1,0 +1,48 @@
+
+.home {
+  background: blue;
+
+  &__flights {
+    background: gray;
+    display: block;
+    width: 90%;
+    height: auto;
+
+    margin: 0;
+    padding: 0 5%;
+  }
+
+  &__flight-info {
+    display: block;
+    width: 40%;
+    height: auto;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background: rgba(23, 54, 34, 0.7);
+  }
+}
+
+header {
+  display: block;
+  width: 90%;
+  height: auto;
+
+  padding: 2rem 5%;
+  margin: 0;
+
+  background: red;
+
+  h1 {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+}
