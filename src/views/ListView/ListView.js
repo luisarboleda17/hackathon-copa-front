@@ -30,8 +30,8 @@ class ListView extends React.Component {
 
   toggleFlightSelect(flight) {
 
-    if (this.state.selectedFlights.includes(flight.id)) {
-      const findFlight = this.state.selectedFlights.findIndex(item => flight.id === item);
+    if (this.state.selectedFlights.includes(flight['FLIGHT_NUMBER'])) {
+      const findFlight = this.state.selectedFlights.findIndex(item => flight['FLIGHT_NUMBER'] === item);
       if (findFlight || findFlight === 0) {
         this.setState({
           selectedFlights: this.state.selectedFlights.filter((_, i) => i !== findFlight)
@@ -41,7 +41,7 @@ class ListView extends React.Component {
       this.setState({
         selectedFlights: [
           ...(this.state.selectedFlights),
-          flight.id
+          flight['FLIGHT_NUMBER']
         ]
       });
     }
@@ -71,10 +71,10 @@ class ListView extends React.Component {
           <div className="flights__body">
             {
               flights.map((flight, index) => {
-                const flightSelected = this.state.selectedFlights.includes(flight.id);
+                const flightSelected = this.state.selectedFlights.includes(flight['FLIGHT_NUMBER']);
                 let formatedDate = flight.date;
                 try {
-                  formatedDate = parseDateToRead(parseStringToDate(flight.date));
+                  formatedDate = parseDateToRead(parseStringToDate(flight['DateYear'], flight['DateMonth'], flight['day']));
                 } catch(err) {
                   console.warn(err);
                 }
@@ -82,10 +82,10 @@ class ListView extends React.Component {
                   <div className={'flight ' + (flightSelected ? 'flight--selected' : null)} key={index}
                        onClick={() => this.toggleFlightSelect(flight)}>
                     <div className="flight__item flight__item--date">{formatedDate}</div>
-                    <div className="flight__item flight__item--flight-number">{flight.id}</div>
-                    <div className="flight__item flight__item--sites">{flight.from.city} <img className="connection-arrow" src={require('../../assets/icons/right-arrow.svg')} alt="Right Arrow"/> {flight.to.city}</div>
-                    <div className="flight__item flight__item--selling">{flight.authorizedToSell}</div>
-                    <div className="flight__item flight__item--sold">{flight.sold}</div>
+                    <div className="flight__item flight__item--flight-number">{flight['FLIGHT_NUMBER']}</div>
+                    <div className="flight__item flight__item--sites">{flight['ORIGIN_ORIGIN']} <img className="connection-arrow" src={require('../../assets/icons/right-arrow.svg')} alt="Right Arrow"/> {flight['DESTINATION_ORIGIN']}</div>
+                    <div className="flight__item flight__item--selling">{flight['TotalAuthorized']}</div>
+                    <div className="flight__item flight__item--sold">{flight['TotalSeatSold']}</div>
                     <div className="flight__item flight__item--no-show">{flight.prediction ? flight.prediction.result : ''}</div>
                     <div className="flight__item flight__item--action">
                       <button className="flight__open-button"

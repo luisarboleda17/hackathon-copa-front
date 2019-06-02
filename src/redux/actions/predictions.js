@@ -9,6 +9,14 @@ import API from '../../api';
  */
 
 
+
 /**
  * Actions
+ */
+
+
+
+/**
+ * Get flights from server
+ * @returns {function(*): (Q.Promise<any> | Promise<T | never>)}
  */

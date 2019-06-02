@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import loadingIcon from '../../assets/icons/travel.svg';
 
-import { closeFlightView, setLoading } from '../../redux/actions/flight-info';
+import { closeFlightView, setLoading, requestPrediction } from '../../redux/actions/flight-info';
 import { parseDateToRead, parseStringToDate } from '../../utils';
 
 class FlightView extends React.Component {
@@ -16,15 +16,15 @@ class FlightView extends React.Component {
   }
 
   predict() {
-    console.log('Predict');
+    this.props.predict(this.props.flight);
   }
 
   render() {
-    const { flight, open, closeView, loading, setLoading } = this.props;
+    const { flight, open, closeView, loading, setLoading, predict } = this.props;
     if (open && flight) {
       let parsedDate = flight.date;
       try {
-        parsedDate = parseDateToRead(parseStringToDate(flight.date));
+        parsedDate = parseDateToRead(parseStringToDate(flight['DateYear'], flight['DateMonth'], flight['day']));
       } catch (err) {
         console.warn(err);
       }
@@ -39,19 +39,19 @@ class FlightView extends React.Component {
           <div className="flight-view__body">
             <div className="flight-view__sites-info">
               <div className="flight-view__site">
-                <h3>{flight.from.city}</h3>
-                <p>{flight.from.airport}</p>
+                <h3>{flight['ORIGIN_ORIGIN']}</h3>
+                <p>{flight['Airport Origin_origin']}</p>
               </div>
               <div className="flight-view__site-arrow"><img src={require('../../assets/icons/right-arrow.svg')} alt="Destination arrow" /></div>
               <div className="flight-view__site">
-                <h3>{flight.to.city}</h3>
-                <p>{flight.to.airport}</p>
+                <h3>{flight['DESTINATION_ORIGIN']}</h3>
+                <p>{flight['Airport DESTINATION_origin']}</p>
               </div>
             </div>
 
             <div className="flight-view__info">
               <h3>Número de vuelo</h3>
-              <p>{flight.id}</p>
+              <p>{flight['FLIGHT_NUMBER']}</p>
             </div>
 
             <div className="flight-view__info">
@@ -61,12 +61,12 @@ class FlightView extends React.Component {
 
             <div className="flight-view__info">
               <h3>Puestos autorizados a vender</h3>
-              <p>{flight.authorizedToSell}</p>
+              <p>{flight['TotalAuthorized']}</p>
             </div>
 
             <div className="flight-view__info">
               <h3>Puestos vendidos</h3>
-              <p>{flight.sold}</p>
+              <p>{flight['TotalSeatSold']}</p>
             </div>
 
             {flight.prediction || loading ? (
@@ -78,7 +78,7 @@ class FlightView extends React.Component {
                 ) : (
                   <div>
                     <h3>No shows</h3>
-                    <p>123</p>
+                    <p>{flight.prediction}</p>
                   </div>
                 )}
               </div>
@@ -107,6 +107,7 @@ const mapStateToProps = ({ flightInfo }) => ({
 const mapDispatchToProps = dispatch => ({
   closeView: () => dispatch(closeFlightView()),
   setLoading: loading => dispatch(setLoading(loading)),
+  predict: data => dispatch(requestPrediction(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlightView);

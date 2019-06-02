@@ -9,11 +9,13 @@ import API from '../../api';
  */
 
 export const LOAD_FLIGHTS = 'LOAD_FLIGHTS';
+
 export const LOADING = 'LOADING';
 
 /**
  * Actions
  */
+
 
 /**
  * Load flights to store
@@ -52,3 +54,4 @@ export const requestFlights = () => (
       });
   }
 );
+

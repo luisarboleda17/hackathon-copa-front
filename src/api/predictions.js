@@ -10,8 +10,8 @@ import url from './url';
  * @param data
  * @returns {Promise<AxiosResponse<T>>}
  */
-//export const getNoShowPredictionForFlight = data => axios.post(`${url}/`, data);
-export const getNoShowPredictionForFlight = data => new Promise(
+export const getNoShowPredictionForFlight = data => axios.post(`${url}/predict`, data);
+/*export const getNoShowPredictionForFlight = data => new Promise(
   (resolve, reject) => {
     const apiTimeout = setTimeout(
       () => {
@@ -23,3 +23,4 @@ export const getNoShowPredictionForFlight = data => new Promise(
     );
   }
 );
+*/

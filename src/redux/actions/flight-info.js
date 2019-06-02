@@ -12,10 +12,19 @@ export const LOAD_FLIGHT = 'LOAD_FLIGHT';
 export const LOADING = 'LOADING';
 export const OPEN_FLIGHT_VIEW = 'OPEN_FLIGHT_VIEW';
 export const CLOSE_FLIGHT_VIEW = 'CLOSE_FLIGHT_VIEW';
+export const PREDICT = 'PREDICT';
 
 /**
  * Actions
  */
+
+export const loadPrediction = data => ({
+  type: PREDICT,
+  payload: {
+    id: data.id,
+    prediction: data.prediction
+  },
+});
 
 /**
  * Load flight to store
@@ -67,6 +76,18 @@ export const requestFlight = () => (
       .then(({ data }) => {
         dispatch(setLoading(false));
         return dispatch(loadFlight(data.data));
+      })
+      .catch((error) => {
+        throw (error);
+      });
+  }
+);
+
+export const requestPrediction = (data) => (
+  function (dispatch) {
+    return API.predictions.getNoShowPredictionForFlight(data)
+      .then(({ data }) => {
+        return dispatch(loadPrediction(data.data));
       })
       .catch((error) => {
         throw (error);
