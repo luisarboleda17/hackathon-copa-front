@@ -1,6 +1,7 @@
 
 @import "../../utils/styles/mixins";
 
+$select-size: 1;
 $date-size: 2;
 $flight-number-size: 1;
 $sites-size: 3;
@@ -16,10 +17,41 @@ $button-hover-state-color: rgb(220, 220, 220);
   width: 100%;
   height: auto;
 
+  &__toolbox {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    padding: 0;
+    text-align: right;
+  }
+
+  &__predict-button {
+    width: auto;
+    height: auto;
+    padding: .75rem 2.25rem;
+
+    font-weight: 400;
+    font-size: 1.3rem;
+
+    @include transition(all 0.3s);
+    background: rgb(17, 53, 88);
+    border-width: 0;
+    color: white;
+    @include border-radius(0px 2px 5px 0px rgba(158,158,158,0.77));
+    @include border-radius(.15rem);
+
+    cursor: pointer;
+
+    &:hover {
+      background: rgb(3, 39, 74);
+    }
+  }
+
   &__flights {
     width: 100%;
     height: auto;
-    margin: 2rem 0;
+    margin: 1rem 0;
     padding: 0;
 
     td, th {
@@ -63,6 +95,7 @@ $button-hover-state-color: rgb(220, 220, 220);
     font-weight: 700;
 
     // 1.2rem 1rem
+    &--select { @include flex($select-size); }
     &--date { @include flex($date-size); }
     &--flight-number { @include flex($flight-number-size); }
     &--sites { @include flex($sites-size); }
@@ -89,10 +122,16 @@ $button-hover-state-color: rgb(220, 220, 220);
     @include border-radius(.15rem);
     @include transition(all 0.3s);
 
-    &:hover {
+    &:hover, &--selected {
       cursor: pointer;
       @include box-shadow(0px 2px 5px 0px rgba(158,158,158,0.77));
       background: rgb(248, 248, 248);
+    }
+
+    &:active {
+      cursor: pointer;
+      @include box-shadow(0px 2px 5px 0px rgba(158,158,158,0.77));
+      background: rgb(238, 238, 238);
     }
 
     &__item {
@@ -105,6 +144,7 @@ $button-hover-state-color: rgb(220, 220, 220);
       font-size: 1rem;
       font-weight: 400;
 
+      &--select { @include flex($select-size); }
       &--date { @include flex($date-size); }
       &--flight-number { @include flex($flight-number-size); }
       &--sites { @include flex($sites-size); }
