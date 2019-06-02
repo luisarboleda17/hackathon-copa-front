@@ -17,12 +17,17 @@ class HomeView extends React.Component {
           <ListView/>
         </section>
 
-        <section className="home__flight-info">
-          <FlightView/>
-        </section>
+        <FlightView/>
       </div>
     );
   }
 }
 
 export default HomeView;
+
+
+/**
+ * <section className="home__flight-info">
+ <FlightView/>
+ </section>
+ */

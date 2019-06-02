@@ -1,0 +1,36 @@
+
+@mixin border-radius($args) {
+  -webkit-border-radius: $args;
+  -moz-border-radius: $args;
+  border-radius: $args;
+}
+
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($vals) {
+  -webkit-box-flex: $vals;
+  -moz-box-flex: $vals;
+  -webkit-flex: $vals;
+  -ms-flex: $vals;
+  flex: $vals;
+}
+
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  -o-box-shadow: $args;
+  box-shadow: $args;
+}

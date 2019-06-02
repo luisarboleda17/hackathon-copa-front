@@ -1,0 +1,159 @@
+
+@import "../../utils/styles/mixins";
+
+$date-size: 2;
+$flight-number-size: 1;
+$sites-size: 3;
+$selling-size: 1;
+$sold-size: 1;
+$action-size: 1;
+
+$button-normal-state-color: white;
+$button-hover-state-color: rgb(220, 220, 220);
+
+.flights-list {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  &__flights {
+    width: 100%;
+    height: auto;
+    margin: 2rem 0;
+    padding: 0;
+
+    td, th {
+      padding: 1.2rem 1rem;
+
+      text-align: left;
+    }
+
+    thead tr th {
+      font-size: 1.2rem;
+    }
+
+    tbody tr {
+      @include transition(all 0.3s);
+      background: rgb(245, 245, 245);
+      margin-top: 25rem;
+
+      td {
+        font-size: 1rem;
+        vertical-align: middle;
+        margin-bottom: 25rem;
+      }
+    }
+  }
+}
+
+.flights__header {
+  @include flexbox();
+  align-items: center;
+  width: 100%;
+  height: auto;
+
+  .flights__head {
+    @include flex(1);
+    display: block;
+    padding: 1.2rem 1rem;
+    margin: 0;
+
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    // 1.2rem 1rem
+    &--date { @include flex($date-size); }
+    &--flight-number { @include flex($flight-number-size); }
+    &--sites { @include flex($sites-size); }
+    &--selling { @include flex($selling-size); }
+    &--sold { @include flex($sold-size); }
+    &--action {
+      @include flex($action-size);
+      text-align: center;
+    }
+  }
+}
+
+.flights__body {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+
+  .flight {
+    @include flexbox();
+    align-items: center;
+    margin: .5rem 0;
+    @include border-radius(.15rem);
+    @include transition(all 0.3s);
+
+    &:hover {
+      cursor: pointer;
+      @include box-shadow(0px 2px 5px 0px rgba(158,158,158,0.77));
+      background: rgb(248, 248, 248);
+    }
+
+    &__item {
+      @include flex(1);
+      display: block;
+      padding: 1rem 1rem;
+      margin: 0;
+
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 400;
+
+      &--date { @include flex($date-size); }
+      &--flight-number { @include flex($flight-number-size); }
+      &--sites { @include flex($sites-size); }
+      &--selling { @include flex($selling-size); }
+      &--sold { @include flex($sold-size); }
+      &--action {
+        @include flex($action-size);
+        text-align: center;
+      }
+
+      .flight__open-button {
+        display: block;
+        width: 2.5rem;
+        height: auto;
+        margin: 0 auto;
+        padding: 0;
+
+        cursor: pointer;
+        background: $button-normal-state-color;
+        @include transition(all 0.3s);
+
+        border-width: 1px;
+        border-color: rgb(220, 220, 220);
+        @include border-radius(.15rem);
+
+        &:hover {
+          background: $button-hover-state-color;
+        }
+
+        img {
+          display: block;
+          width: 50%;
+          height: auto;
+          margin: 25%;
+          padding: 0;
+
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+
+      .connection-arrow {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        width: 4rem;
+        height: 1rem;
+      }
+    }
+  }
+}

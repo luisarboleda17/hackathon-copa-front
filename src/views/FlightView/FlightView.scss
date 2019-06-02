@@ -1,0 +1,168 @@
+
+@import "../../utils/styles/mixins";
+
+.flight-view {
+  @include flexbox();
+  flex-direction: column;
+  align-items: flex-start;
+  display: block;
+  width: 40%;
+  height: auto;
+
+  margin: 0;
+  padding: 1rem 2rem;
+
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  background: rgb(248, 248, 248);
+
+  @include box-shadow(-2px 0px 5px 0px rgba(158,158,158,0.77));
+
+  &__header {
+    @include flex(1);
+    @include flexbox();
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    h2 {
+      @include flex(5);
+      text-align: left;
+    }
+
+    button {
+      @include flex(1);
+      width: auto;
+      height: auto;
+
+      margin: 0;
+      padding: 0;
+
+      text-align: center;
+
+      background: transparent;
+      border-width: 0;
+      outline: 0;
+      cursor: pointer;
+
+      img {
+        width: 30%;
+        height: auto;
+        margin: 0 auto;
+        padding: 0;
+      }
+    }
+
+  }
+
+  &__body {
+    @include flex(1);
+
+    .flight-view__sites-info {
+      @include flexbox();
+      align-items: center;
+      width: 100%;
+      height: auto;
+
+      margin: 2rem 0;
+      padding: 0;
+
+      .flight-view__site {
+        @include flex(3);
+        text-align: center;
+
+        h3 {
+          font-size: 2rem;
+          font-weight: 700;
+
+          text-align: center;
+          margin: 0 auto;
+          padding: 0;
+        }
+
+        p {
+          font-size: 1rem;
+          font-weight: 300;
+
+          text-align: center;
+          margin: 1rem auto;
+          padding: 0;
+        }
+      }
+
+      .flight-view__site-arrow {
+        @include flex(1);
+        max-width: 10%;
+        margin: 0 10%;
+      }
+    }
+
+    .flight-view__info {
+      display: block;
+      width: 100%;
+      height: auto;
+
+      margin: 1rem 0;
+      padding: 0;
+
+      h3 {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        margin: 0;
+        padding: 0;
+
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      p {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        margin: 0;
+        padding: 0;
+
+        font-weight: 400;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &__footer {
+    @include flex(1);
+    margin: 1.5rem 0 0 0;
+
+    .flight-view__predict-button {
+      display: block;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+      padding: .75rem 2.25rem;
+
+      font-weight: 400;
+      font-size: 1.3rem;
+
+      @include transition(all 0.3s);
+      background: rgb(17, 53, 88);
+      border-width: 0;
+      color: white;
+      @include border-radius(0px 2px 5px 0px rgba(158,158,158,0.77));
+      @include border-radius(.15rem);
+
+      cursor: pointer;
+
+      &:hover {
+        background: rgb(3, 39, 74);
+      }
+    }
+  }
+}
