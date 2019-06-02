@@ -65,6 +65,7 @@ class ListView extends React.Component {
             <div className="flights__head flights__head--sites">Origen / Destino</div>
             <div className="flights__head flights__head--selling">Autorizados a vender</div>
             <div className="flights__head flights__head--sold">Vendidos</div>
+            <div className="flights__head flights__head--no-show">No Shows</div>
             <div className="flights__head flights__head--action">Acción</div>
           </div>
           <div className="flights__body">
@@ -85,6 +86,7 @@ class ListView extends React.Component {
                     <div className="flight__item flight__item--sites">{flight.from.city} <img className="connection-arrow" src={require('../../assets/icons/right-arrow.svg')} alt="Right Arrow"/> {flight.to.city}</div>
                     <div className="flight__item flight__item--selling">{flight.authorizedToSell}</div>
                     <div className="flight__item flight__item--sold">{flight.sold}</div>
+                    <div className="flight__item flight__item--no-show">{flight.prediction ? flight.prediction.result : ''}</div>
                     <div className="flight__item flight__item--action">
                       <button className="flight__open-button"
                               onClick={() => this.openFlight(flight)}>

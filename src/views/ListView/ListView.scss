@@ -1,12 +1,12 @@
 
 @import "../../utils/styles/mixins";
 
-$select-size: 1;
 $date-size: 2;
 $flight-number-size: 1;
 $sites-size: 3;
 $selling-size: 1;
 $sold-size: 1;
+$no-show-size: 1;
 $action-size: 1;
 
 $button-normal-state-color: white;
@@ -95,12 +95,12 @@ $button-hover-state-color: rgb(220, 220, 220);
     font-weight: 700;
 
     // 1.2rem 1rem
-    &--select { @include flex($select-size); }
     &--date { @include flex($date-size); }
     &--flight-number { @include flex($flight-number-size); }
     &--sites { @include flex($sites-size); }
     &--selling { @include flex($selling-size); }
     &--sold { @include flex($sold-size); }
+    &--no-show { @include flex($no-show-size); }
     &--action {
       @include flex($action-size);
       text-align: center;
@@ -144,12 +144,12 @@ $button-hover-state-color: rgb(220, 220, 220);
       font-size: 1rem;
       font-weight: 400;
 
-      &--select { @include flex($select-size); }
       &--date { @include flex($date-size); }
       &--flight-number { @include flex($flight-number-size); }
       &--sites { @include flex($sites-size); }
       &--selling { @include flex($selling-size); }
       &--sold { @include flex($sold-size); }
+      &--no-show { @include flex($no-show-size); }
       &--action {
         @include flex($action-size);
         text-align: center;
