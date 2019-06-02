@@ -3,12 +3,24 @@ import './FlightView.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { closeFlightView } from '../../redux/actions/flight-info';
+import loadingIcon from '../../assets/icons/travel.svg';
+
+import { closeFlightView, setLoading } from '../../redux/actions/flight-info';
 import { parseDateToRead, parseStringToDate } from '../../utils';
 
 class FlightView extends React.Component {
+
+  constructor() {
+    super();
+    this.predict = this.predict.bind(this);
+  }
+
+  predict() {
+    console.log('Predict');
+  }
+
   render() {
-    const { flight, open, closeView } = this.props;
+    const { flight, open, closeView, loading, setLoading } = this.props;
     if (open && flight) {
       let parsedDate = flight.date;
       try {
@@ -57,14 +69,25 @@ class FlightView extends React.Component {
               <p>{flight.sold}</p>
             </div>
 
-            <div className="flight-view__info">
-              <h3>No shows</h3>
-              <p>123</p>
-            </div>
+            {flight.prediction || loading ? (
+              <div className="flight-view__info flight-view__info--no-show">
+                {loading ? (
+                  <div className="loading-view">
+                    <img src={loadingIcon} className="loading-view__icon" alt="loading" />
+                  </div>
+                ) : (
+                  <div>
+                    <h3>No shows</h3>
+                    <p>123</p>
+                  </div>
+                )}
+              </div>
+            ) : null}
           </div>
 
           <div className="flight-view__footer">
-            <button className="flight-view__predict-button">
+            <button className="flight-view__predict-button"
+                    onClick={() => this.predict()}>
               Predecir No Show
             </button>
           </div>
@@ -82,7 +105,8 @@ const mapStateToProps = ({ flightInfo }) => ({
   open: flightInfo.open,
 });
 const mapDispatchToProps = dispatch => ({
-  closeView: () => dispatch(closeFlightView())
+  closeView: () => dispatch(closeFlightView()),
+  setLoading: loading => dispatch(setLoading(loading)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlightView);

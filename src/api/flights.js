@@ -126,7 +126,7 @@ export const getFlights = () => new Promise(
                   city: 'MGA',
                   airport: 'AUGUSTO C. SANDINO INTERNATIONAL AIRPORT NICARAGUA'
                 },
-                authorizedToSell: 124,
+                              authorizedToSell: 124,
                 sold: 46,
                 available: 78
               }
