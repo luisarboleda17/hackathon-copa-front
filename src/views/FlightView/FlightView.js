@@ -49,6 +49,11 @@ class FlightView extends React.Component {
               </div>
             </div>
 
+              <div className="flight-view__info">
+                  <h3>Indice de vuelo</h3>
+                  <p>{flight['index']}</p>
+              </div>
+
             <div className="flight-view__info">
               <h3>Número de vuelo</h3>
               <p>{flight['FLIGHT_NUMBER']}</p>
@@ -78,7 +83,7 @@ class FlightView extends React.Component {
                 ) : (
                   <div>
                     <h3>No shows</h3>
-                    <p>{flight.prediction}</p>
+                    <p className="flight-view__prediction">{flight.prediction}</p>
                   </div>
                 )}
               </div>

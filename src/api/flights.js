@@ -17,6 +17,7 @@ export const getFlights = () => new Promise(
     const keys = Object.keys(flights);
     const mappedFlights = keys.map(key => {
       const flight = flights[key];
+      flight.index = key;
       return flight;
     });
     resolve({

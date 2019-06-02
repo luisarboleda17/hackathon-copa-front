@@ -3,8 +3,8 @@ import './ListView.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { requestFlights, setLoading } from '../../redux/actions/flights';
-import { loadFlight, openFlightView } from '../../redux/actions/flight-info';
+import { requestFlights, setLoading, requestPredictions } from '../../redux/actions/flights';
+import {loadFlight, openFlightView, requestPrediction} from '../../redux/actions/flight-info';
 import { parseStringToDate, parseDateToRead } from '../../utils';
 
 class ListView extends React.Component {
@@ -17,6 +17,7 @@ class ListView extends React.Component {
     super();
     this.openFlight = this.openFlight.bind(this);
     this.toggleFlightSelect = this.toggleFlightSelect.bind(this);
+    this.predict = this.predict.bind(this);
   }
 
   componentDidMount() {
@@ -47,19 +48,25 @@ class ListView extends React.Component {
     }
   }
 
+  predict() {
+    this.props.predict(this.props.flights.filter(flight => this.state.selectedFlights.includes(flight['FLIGHT_NUMBER'])));
+  }
+
   render() {
     const { flights } = this.props;
+      console.log('FLIGHTS', flights);
     return (
       <section className="flights-list">
 
-        {this.state.selectedFlights.length > 0 ? (
-          <div className="flights-list__toolbox">
-            <button className="flights-list__predict-button">Predecir {this.state.selectedFlights.length} No Show</button>
-          </div>
-        ) : null}
+          {this.state.selectedFlights.length > 0 ? (
+              <div className="flights-list__toolbox">
+                  <button className="flights-list__predict-button" onClick={() => this.predict()}>Predecir {this.state.selectedFlights.length} No Show</button>
+              </div>
+          ) : null}
 
         <div className="flights-list__flights">
           <div className="flights__header">
+              <div className="flights__head flights__head--index">Indice</div>
             <div className="flights__head flights__head--date">Fecha de salida</div>
             <div className="flights__head flights__head--flight-number"># Vuelo</div>
             <div className="flights__head flights__head--sites">Origen / Destino</div>
@@ -81,12 +88,13 @@ class ListView extends React.Component {
                 return (
                   <div className={'flight ' + (flightSelected ? 'flight--selected' : null)} key={index}
                        onClick={() => this.toggleFlightSelect(flight)}>
+                      <div className="flight__item flight__item--index">{flight.index}</div>
                     <div className="flight__item flight__item--date">{formatedDate}</div>
                     <div className="flight__item flight__item--flight-number">{flight['FLIGHT_NUMBER']}</div>
                     <div className="flight__item flight__item--sites">{flight['ORIGIN_ORIGIN']} <img className="connection-arrow" src={require('../../assets/icons/right-arrow.svg')} alt="Right Arrow"/> {flight['DESTINATION_ORIGIN']}</div>
                     <div className="flight__item flight__item--selling">{flight['TotalAuthorized']}</div>
                     <div className="flight__item flight__item--sold">{flight['TotalSeatSold']}</div>
-                    <div className="flight__item flight__item--no-show">{flight.prediction ? flight.prediction.result : ''}</div>
+                    <div className="flight__item flight__item--no-show">{flight.prediction || flight.prediction === 0 ? flight.prediction : ''}</div>
                     <div className="flight__item flight__item--action">
                       <button className="flight__open-button"
                               onClick={() => this.openFlight(flight)}>
@@ -113,6 +121,7 @@ const mapDispatchToProps = dispatch => ({
   setLoading: () => dispatch(setLoading()),
   loadFlight: flight => dispatch(loadFlight(flight)),
   openFlightView: () => dispatch(openFlightView()),
+    predict: data => dispatch(requestPredictions(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListView);

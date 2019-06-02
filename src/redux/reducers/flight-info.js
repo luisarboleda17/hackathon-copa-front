@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
     case CLOSE_FLIGHT_VIEW:
       return {...state, ...{ open: false }};
     case PREDICT:
-      return {...state, ...{ flight: { ...state.flight, predict: action.payload.prediction } }};
+      return {...state, ...{ flight: { ...state.flight, prediction: action.payload.prediction } }};
     default:
       return state;
   }

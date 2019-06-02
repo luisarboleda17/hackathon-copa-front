@@ -3,13 +3,14 @@
  */
 
 import API from '../../api';
+import {loadPrediction, PREDICT} from "./flight-info";
 
 /**
  * Action types
  */
 
 export const LOAD_FLIGHTS = 'LOAD_FLIGHTS';
-
+export const PREDICT_MULTIPLE = 'PREDICT_MULTIPLE';
 export const LOADING = 'LOADING';
 
 /**
@@ -37,6 +38,11 @@ export const setLoading = loading => ({
   payload: loading,
 });
 
+export const loadPredictions = data => ({
+    type: PREDICT_MULTIPLE,
+    payload: data,
+});
+
 /**
  * Get flights from server
  * @returns {function(*): (Q.Promise<any> | Promise<T | never>)}
@@ -53,5 +59,21 @@ export const requestFlights = () => (
         throw (error);
       });
   }
+);
+
+export const requestPredictions = (data) => (
+    function (dispatch) {
+        Promise.all(
+            data.map(flight => API.predictions.getNoShowPredictionForFlight(flight)),
+        )
+            .then((values) => {
+                const data = values.map(flight => flight.data.data);
+                console.log(data);
+                return dispatch(loadPredictions(data));
+            })
+            .catch((error) => {
+                throw (error);
+            });
+    }
 );
 

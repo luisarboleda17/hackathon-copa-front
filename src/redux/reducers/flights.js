@@ -4,7 +4,8 @@
 
 import {
   LOAD_FLIGHTS,
-  LOADING
+  LOADING,
+    PREDICT_MULTIPLE
 } from '../actions/flights';
 
 const initialState = {
@@ -20,6 +21,14 @@ export default (state = initialState, action) => {
       return { ...state, ...{ flights: action.payload } };
     case LOADING:
       return { ...state, ...{ loading: action.payload } };
+      case PREDICT_MULTIPLE:
+        return {...state, flights: state.flights.map(iterFlight => {
+          const flight = action.payload.find(fl => fl.id === iterFlight['FLIGHT_NUMBER']);
+          if (flight) {
+              iterFlight.prediction = flight.prediction;
+          }
+          return iterFlight;
+            })};
     default:
       return state;
   }

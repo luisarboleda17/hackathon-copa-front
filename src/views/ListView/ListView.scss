@@ -1,6 +1,7 @@
 
 @import "../../utils/styles/mixins";
 
+$index-size: 1;
 $date-size: 2;
 $flight-number-size: 1;
 $sites-size: 3;
@@ -95,6 +96,7 @@ $button-hover-state-color: rgb(220, 220, 220);
     font-weight: 700;
 
     // 1.2rem 1rem
+    &--index { @include flex($index-size); }
     &--date { @include flex($date-size); }
     &--flight-number { @include flex($flight-number-size); }
     &--sites { @include flex($sites-size); }
@@ -144,6 +146,7 @@ $button-hover-state-color: rgb(220, 220, 220);
       font-size: 1rem;
       font-weight: 400;
 
+      &--index { @include flex($index-size); }
       &--date { @include flex($date-size); }
       &--flight-number { @include flex($flight-number-size); }
       &--sites { @include flex($sites-size); }
